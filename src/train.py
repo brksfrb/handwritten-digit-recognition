@@ -109,11 +109,16 @@ for epoch in range(epochs):
 # ================================
 # 6. SAVE MODEL
 # ================================
-if not os.path.exists('weights'):
-    os.mkdir('weights')
-torch.save(model.state_dict(), "weights/digit_model.pth")
+# Get project root (one level above this file)
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-print("Model saved as digit_model.pth!")
+# Make weights folder in project root
+weights_dir = os.path.join(project_root, "weights")
+os.makedirs(weights_dir, exist_ok=True)
+
+# Save model
+torch.save(model.state_dict(), os.path.join(weights_dir, "digit_model.pth"))
+print(f"Model saved as {os.path.join(weights_dir, 'digit_model.pth')}!")
 
 # ================================
 # 7. CONFUSION MATRIX
@@ -140,7 +145,16 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=dataset.classe
 disp.plot(cmap=plt.cm.Blues)
 plt.title("Validation Confusion Matrix")
 
-# Save and show
-os.makedirs("assets", exist_ok=True)
-plt.savefig("assets/confusion_matrix.png")
+# Get project root (one level above this file)
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Make assets folder in project root
+assets_dir = os.path.join(project_root, "assets")
+os.makedirs(assets_dir, exist_ok=True)
+
+# Save confusion matrix
+conf_matrix_path = os.path.join(assets_dir, "confusion_matrix.png")
+plt.savefig(conf_matrix_path)
+
+print(f"Confusion matrix saved as {conf_matrix_path}!")
 plt.show()
