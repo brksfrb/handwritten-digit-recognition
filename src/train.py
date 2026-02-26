@@ -6,6 +6,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 from model import DigitNet
+from root import data_dir
 
 # ================================
 # 1. DATA AUGMENTATION
@@ -36,7 +37,8 @@ val_transform = transforms.Compose([
 # ================================
 # 2. LOAD DATASET
 # ================================
-dataset = datasets.ImageFolder("../data/", transform=train_transform)
+# --- Load dataset ---
+dataset = datasets.ImageFolder(data_dir, transform=train_transform)
 
 train_size = int(0.85 * len(dataset))
 val_size = len(dataset) - train_size

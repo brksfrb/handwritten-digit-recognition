@@ -7,13 +7,13 @@ import torch
 from torchvision import transforms
 import torch.nn.functional as F
 from model import DigitNet
+from root import weights_dir
 
 # ================================
 # 1. Load trained model
 # ================================
 model = DigitNet()
-BASE_DIR = Path(__file__).resolve().parent.parent
-weights_path = BASE_DIR / "weights" / "digit_model.pth"
+weights_path = weights_dir / "digit_model.pth"
 
 model.load_state_dict(torch.load(weights_path, map_location="cpu"))
 model.eval()

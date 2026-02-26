@@ -12,7 +12,12 @@ display_size = 280  # for easier drawing
 label = input("Enter digit label (0–9): ")
 if not label.isdigit() or not (0 <= int(label) <= 9):
     raise ValueError("Label must be a digit between 0 and 9.")
-save_dir = f"data/{label}"
+# --- Get project root dynamically ---
+project_root = os.path.dirname(os.path.abspath(__file__))  # if draw.py is in src/
+project_root = os.path.dirname(project_root)  # one level above src/
+
+# --- Save directory ---
+save_dir = os.path.join(project_root, "data", label)
 os.makedirs(save_dir, exist_ok=True)
 
 # --- Counter: continue from latest saved file ---
