@@ -1,0 +1,10 @@
+__pycache__/
+
+*.pyc
+*.pth
+
+data/
+weights/
+
+.idea/
+.env
